@@ -6,6 +6,12 @@ Especificações técnicas do desafio: https://dadosportodoscommunity.short.gy/0
 
 ## Ferramentas: 
 Obrigatórias: Google Cloud Storage; BigQuery; Metabase
+
+
+
+
+
+
 Irei utilizar de forma adicional: Dataform; Cloud Run; Github
 
 ## Detalhamento Técnico:
