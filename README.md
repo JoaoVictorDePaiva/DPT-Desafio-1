@@ -19,3 +19,7 @@ Localização: us-central1; Optei por essa single-região pois, para este projet
 Temperatura dos dados: Standard; Como irei utilizar os meus dados de forma quase instantânea no BigQuery, esta era a opção que mais fazia sentido. No final da discussão sobre o GCS irei entrar novamente nessa questão da temperatura.
 
 O restante das configurações, nessa fase inicial, permaneceram os recomendados pela Google.
+
+Antes de partir para o BQ, criei uma regra sobre o ciclo de vida dos dados no meu bucket. Como estimo que irei levar, no máximo, 1 dia para realizar esse desafio, configurei a transição automática dos objetos para a classe de armazenamento Coldline 2 dias após a sua criação dentro do bucket, garantindo uma boa prática de FinOps. Embora o impacto financeiro seja irrisório neste desafio devido à baixa volumetria, é importante criar um habito de realizar boas práticas nas ferramentas que usamos. Vale ressaltar que, em um ambiente produtivo complexo, essa transição não deve ser baseada em estimativas de tempo fixas, no sentido de "prevejo que daqui 2 dias já estará finalizado", mas acredito que, por se tratar de um desafio relativamente "simples", funciona bem neste caso.
+
+<img width="817" height="509" alt="image" src="https://github.com/user-attachments/assets/4fd0ef08-6146-49e8-8e97-5424391cee22" />
