@@ -2,6 +2,7 @@
 
 Repositório do desafio 1 do projeto "Dados por Todos"
 Linkedin do DPT: https://www.linkedin.com/company/dadosportodos/
+
 Especificações técnicas do desafio: https://dadosportodoscommunity.short.gy/01-DESAFIOTECNICO
 
 ## Ferramentas: 
