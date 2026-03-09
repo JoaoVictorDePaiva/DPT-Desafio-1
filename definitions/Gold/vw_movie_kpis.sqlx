@@ -1,0 +1,13 @@
+config {
+  type: "view",
+  schema: "Gold",
+  name: "vw_movie_kpis",
+  description: "KPIs gerais da plataforma de filmes"
+}
+
+SELECT
+  (SELECT COUNT(DISTINCT movie_id) FROM ${ref("slv_movies")}) AS total_filmes_catalogo,
+  COUNT(movie_id) AS total_avaliacoes_realizadas,
+  COUNT(DISTINCT user_id) AS total_usuarios_ativos,
+  ROUND(AVG(nota_avaliacao), 2) AS rating_medio_plataforma
+FROM ${ref("slv_fact_ratings")}

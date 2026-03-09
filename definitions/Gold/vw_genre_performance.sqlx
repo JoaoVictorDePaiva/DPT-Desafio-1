@@ -1,0 +1,24 @@
+config {
+  type: "view",
+  schema: "Gold",
+  name: "vw_genre_performance",
+  description: "Performance de avaliações quebrada por gênero individual"
+}
+
+WITH filmes_generos_separados AS (
+  SELECT
+    movie_id,
+    genero_individual
+  FROM ${ref("slv_movies")},
+  UNNEST(SPLIT(generos, '|')) AS genero_individual
+)
+
+SELECT
+  g.genero_individual AS genero,
+  COUNT(DISTINCT r.movie_id) AS quantidade_filmes_avaliados,
+  COUNT(r.user_id) AS total_avaliacoes,
+  ROUND(AVG(r.nota_avaliacao), 2) AS rating_medio_genero
+FROM filmes_generos_separados g
+INNER JOIN ${ref("slv_fact_ratings")} r 
+  ON g.movie_id = r.movie_id
+GROUP BY g.genero_individual

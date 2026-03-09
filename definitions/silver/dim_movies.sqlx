@@ -1,0 +1,15 @@
+config {
+  type: "table",
+  schema: "Silver",
+  name: "slv_movies",
+  description: "Tabela dim de filmes"
+}
+
+SELECT
+  SAFE_CAST(movieID AS INT64) AS movie_id,
+  TRIM(REGEXP_REPLACE(title, r'\s*\(\d{4}\)', '')) AS titulo,
+  LOWER(genres) AS generos,
+  SAFE_CAST(REGEXP_EXTRACT(title, r'\((\d{4})\)') AS INT64) AS ano_lancamento
+
+FROM ${ref("brz_movies")} 
+WHERE movieID IS NOT NULL

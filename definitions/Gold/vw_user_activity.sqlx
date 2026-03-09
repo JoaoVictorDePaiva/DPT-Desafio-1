@@ -1,0 +1,16 @@
+config {
+  type: "view",
+  schema: "Gold",
+  name: "vw_user_activity",
+  description: "Métricas de engajamento e comportamento por usuário"
+}
+
+SELECT
+  user_id,
+  COUNT(movie_id) AS total_filmes_avaliados,
+  ROUND(AVG(nota_avaliacao), 2) AS media_notas_dadas,
+  MIN(data_avaliacao) AS primeira_avaliacao,
+  MAX(data_avaliacao) AS ultima_avaliacao,
+  DATE_DIFF(DATE(MAX(data_avaliacao)), DATE(MIN(data_avaliacao)), DAY) AS dias_de_vida_usuario
+FROM ${ref("slv_fact_ratings")}
+GROUP BY user_id
