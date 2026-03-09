@@ -27,9 +27,46 @@ No BigQuery, preferi deixar a maioria das opções como o padrão, tanto na cria
 
 <img width="1540" height="127" alt="image" src="https://github.com/user-attachments/assets/31ef1b7d-510b-4d01-bdbb-b2556ea182a9" />
 
+
 Minha camada bronze está, na realidade, no gcs, mas realizei uma cópia no bq, seguindo as instruções do desafio. Além disso, nomeei as tabelas seguindo o padrão de camada_nomedatabela:
 
 <img width="1540" height="210" alt="image" src="https://github.com/user-attachments/assets/a68ab97a-e01d-4e3c-9bb5-ba022ab8f18b" />
 
 
+## Dataform
+Apesar de rodar em cima do BigQuery, ele merece um destaque somente para ele pois foi o principal motor da aplicação. Resolvi utiliza-lo por dois principais motivos:
+
+1 - Rastreabilidade nativa pelo github
+
+2 - Programação de Jobs automaticos com um gatilho de tempo especifico
+
+Apesar do ponto 2 não ser tão utilizado nesse desafio em específico, é importante estar familiarizado com essa parte tão essencial e importante da ferramenta, além de facilitar muito a vida em projetos maiores. Além disso, ele é praticamente "custo zero", pois usa toda a estrutura do BQ por trás. Para a criação das tabelas, optei por utilizar o .sqlx, padrão do dataform, em vez do .js, pois é o que estou mais familiarizado e acredito que facilita a leitura. Abaixo irei deixar um exemplo de código da camada bronze para a tabela "brz_movies", o restante segue um padrão semelhante:
+
+config {
+  type: "operations",
+  hasOutput: true,
+  schema: "MovieLens_Beliefs",
+  name: "brz_movies"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE ${self()} (
+  movieID STRING,
+  title STRING,
+  genres STRING
+)
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://bronze-dpt/movies.csv'],
+  skip_leading_rows = 1,
+  ignore_unknown_values = true,
+  quote = '"'
+);
+
+###Todos os códigos estão disponíveis nesse github na pasta definitions
+
+Não entrarei muito na questão de nomenclatura de colunas nem escolhas entre external table ou uma tabela nativa pois segui estritamente as regras do desafio, porém é importante diferenciar para quem for utilizar esse repositório como estudo:
+
+External table: Apesar de não pagar nada por armazenamento no BQ, as consultas são muito lentas em tabelas pesadas. Isso acontece porque o BigQuery precisa "viajar" até o storage, ler o CSV completo e só depois trazer a consulta.
+
+Tabela nativa: Aqui existe o custo de armazenamento no BQ, mas é extremamente rápido para consultas e transformações, visto que o BigQuery já conhece completamente a estrutura da tabela e, devido a sua natureza colunar, as queries são feitas de maneira muito veloz.
 
