@@ -70,3 +70,7 @@ External table: Apesar de não pagar nada por armazenamento no BQ, as consultas 
 
 Tabela nativa: Aqui existe o custo de armazenamento no BQ, mas é extremamente rápido para consultas e transformações, visto que o BigQuery já conhece completamente a estrutura da tabela e, devido a sua natureza colunar, as queries são feitas de maneira muito veloz.
 
+### Metabase
+
+Apesar de eu não ter uma experiência com a ferramenta, tenho um pouco com Power BI e tentei usá-la para fazer o dashboard (que estará linkado ao final da apresentação). Além disso, utilizei como base o ótimo livro "storytelling com dados" da Cole Nussbaumer Knaflic, especificamente o capítulo 3, haja vista que não há uma personalização tão grande com o metabase. No mais, segui para um padrão mais legível de dashboard, priorizando o padrão de leitura ocidental padrão (esquerda para direita e de cima para baixo)
+
