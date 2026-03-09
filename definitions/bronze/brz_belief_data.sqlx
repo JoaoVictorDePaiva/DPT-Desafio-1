@@ -1,0 +1,27 @@
+config {
+  type: "operations",
+  hasOutput: true,
+  schema: "MovieLens_Beliefs",
+  name: "brz_belief_data"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE ${self()} (
+  userId STRING, 
+  movieId STRING, 
+  isSeen STRING, 
+  watchDate STRING, 
+  userElicitRating STRING, 
+  userPredictRating STRING, 
+  userCertainty STRING, 
+  tstamp STRING, 
+  movie_idx STRING, 
+  source STRING, 
+  systemPredictRating STRING
+)
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://bronze-dpt/belief_data.csv'],
+  skip_leading_rows = 1,
+  ignore_unknown_values = true,
+  quote = '"'
+);

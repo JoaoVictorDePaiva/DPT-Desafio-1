@@ -1,0 +1,20 @@
+config {
+  type: "operations",
+  hasOutput: true,
+  schema: "MovieLens_Beliefs",
+  name: "brz_movie_elicitation_set"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE ${self()} (
+  movieID STRING,
+  month_idx STRING,
+  source STRING,
+  tstamp STRING
+)
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://bronze-dpt/movie_elicitation_set.csv'],
+  skip_leading_rows = 1,
+  ignore_unknown_values = true,
+  quote = '"'
+);
