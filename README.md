@@ -62,7 +62,7 @@ OPTIONS (
   quote = '"'
 );
 
-### ~Todos os códigos estão disponíveis nesse github na pasta definitions~
+### Todos os códigos estão disponíveis nesse github na pasta definitions
 
 Não entrarei muito na questão de nomenclatura de colunas nem escolhas entre external table ou uma tabela nativa pois segui estritamente as regras do desafio, porém é importante diferenciar para quem for utilizar esse repositório como estudo:
 
@@ -75,3 +75,4 @@ Tabela nativa: Aqui existe o custo de armazenamento no BQ, mas é extremamente r
 Apesar de eu não ter uma experiência com a ferramenta, tenho um pouco com Power BI e tentei usá-la para fazer o dashboard (que estará linkado ao final da apresentação). Além disso, utilizei como base o ótimo livro "storytelling com dados" da Cole Nussbaumer Knaflic, especificamente o capítulo 3, haja vista que não há uma personalização tão grande com o metabase. No mais, segui para um padrão mais legível de dashboard, priorizando o padrão de leitura ocidental padrão (esquerda para direita e de cima para baixo)
 
 Link do dashboard: https://drive.google.com/file/d/1UHmbMPNS8tvOBrIrTF5zXJ2jCKnV4rdy/view?usp=drive_link
+
