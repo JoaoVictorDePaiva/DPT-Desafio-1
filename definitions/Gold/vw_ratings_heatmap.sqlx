@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "Gold",
+  name: "vw_ratings_heatmap",
+  description: "Volume de avaliações por dia da semana e hora do dia"
+}
+
+SELECT
+  EXTRACT(DAYOFWEEK FROM data_avaliacao) AS dia_semana,
+  EXTRACT(HOUR FROM data_avaliacao) AS hora_dia,
+  COUNT(user_id) AS volume_avaliacoes,
+  ROUND(AVG(nota_avaliacao), 2) AS rating_medio_periodo
+FROM ${ref("slv_fact_ratings")}
+GROUP BY dia_semana, hora_dia

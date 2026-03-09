@@ -1,0 +1,15 @@
+config {
+  type: "view",
+  schema: "Gold",
+  name: "vw_scatter_popularity_vs_quality",
+  description: "Relação entre quantidade de avaliações e nota média"
+}
+
+SELECT
+  f.titulo,
+  COUNT(r.user_id) AS popularidade_total_avaliacoes,
+  ROUND(AVG(r.nota_avaliacao), 2) AS qualidade_rating_medio
+FROM ${ref("slv_movies")} f
+INNER JOIN ${ref("slv_fact_ratings")} r 
+  ON f.movie_id = r.movie_id
+GROUP BY f.titulo

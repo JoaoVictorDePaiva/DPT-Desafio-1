@@ -1,0 +1,22 @@
+config {
+  type: "table",
+  schema: "Silver",
+  name: "slv_fact_ratings",
+  description: "Tabela de rating"
+}
+WITH rating_unificado AS (
+  SELECT userId, movieId, rating, tstamp 
+  FROM ${ref("brz_user_rating_history")}
+  UNION ALL
+  SELECT userId, movieId, rating, tstamp 
+  FROM ${ref("brz_ratings_for_additional_users")}
+)
+SELECT
+  SAFE_CAST(userId AS INT64) AS user_id,
+  SAFE_CAST(movieId AS INT64) AS movie_id,
+  SAFE_CAST(rating AS FLOAT64) AS nota_avaliacao,
+  SAFE_CAST(tstamp AS TIMESTAMP) AS data_avaliacao
+
+FROM rating_unificado
+WHERE userId IS NOT NULL 
+  AND movieId IS NOT NULL
